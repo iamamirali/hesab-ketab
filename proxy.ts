@@ -30,7 +30,7 @@ export async function proxy(request: NextRequest) {
   if (isAuthRoute && user) {
     const url = request.nextUrl.clone();
 
-    url.pathname = "/";
+    url.pathname = "/panel";
 
     return NextResponse.redirect(url);
   }
