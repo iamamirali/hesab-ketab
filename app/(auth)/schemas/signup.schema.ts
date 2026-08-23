@@ -8,7 +8,7 @@ export const signupSchema = z
       .min(2, "نام و نام خانوادگی باید حداقل ۲ کاراکتر باشد.")
       .max(100, "نام و نام خانوادگی بیش از حد طولانی است."),
 
-    email: z.string().trim().email("ایمیل واردشده معتبر نیست."),
+    email: z.email("ایمیل واردشده معتبر نیست."),
 
     password: z
       .string()

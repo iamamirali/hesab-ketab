@@ -4,18 +4,18 @@ import { startTransition, useActionState, useEffect } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signupSchema, type SignupFormValues } from "../schemas/signup.schema";
-import { signupAction } from "../actions/signup.action";
-import { SignupActionState } from "../types/auth-action.types";
+import { loginSchema, type LoginFormValues } from "../schemas/login.schema";
+import { loginAction } from "../actions/login.action";
+import type { LoginActionState } from "../types/auth-action.types";
 
-const initialState: SignupActionState = {
+const initialState: LoginActionState = {
   success: false,
   message: "",
 };
 
-export default function SignupForm() {
+export default function LoginForm() {
   const [state, formAction, isPending] = useActionState(
-    signupAction,
+    loginAction,
     initialState,
   );
 
@@ -25,13 +25,11 @@ export default function SignupForm() {
     setError,
     clearErrors,
     formState: { errors },
-  } = useForm<SignupFormValues>({
-    resolver: zodResolver(signupSchema),
+  } = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
-      fullName: "",
       email: "",
       password: "",
-      confirmPassword: "",
     },
   });
 
@@ -39,34 +37,26 @@ export default function SignupForm() {
     if (state.fieldErrors) {
       Object.entries(state.fieldErrors).forEach(([field, messages]) => {
         if (messages?.[0]) {
-          setError(field as keyof SignupFormValues, {
+          setError(field as keyof LoginFormValues, {
             type: "server",
             message: messages[0],
           });
         }
       });
     }
-  }, [state.fieldErrors, setError]);
 
-  // useEffect(() => {
-  //   if (state.success && state.message) {
-  //     if (state.message.includes("ایمیل")) {
-  //       return;
-  //     }
+    // if (state.success) {
+    //   router.push("/dashboard");
+    //   router.refresh();
+    // }
+  }, [state, setError]);
 
-  //     router.push("/dashboard");
-  //     router.refresh();
-  //   }
-  // }, [state.success, state.message, router]);
-
-  const onSubmit = (values: SignupFormValues) => {
+  const onSubmit = (values: LoginFormValues) => {
     clearErrors();
 
     const formData = new FormData();
-    formData.append("fullName", values.fullName);
     formData.append("email", values.email);
     formData.append("password", values.password);
-    formData.append("confirmPassword", values.confirmPassword);
 
     startTransition(() => {
       formAction(formData);
@@ -76,39 +66,16 @@ export default function SignupForm() {
   return (
     <div className="w-full">
       <div className="mb-7">
-        <h1 className="text-2xl font-bold text-slate-900">ایجاد حساب کاربری</h1>
+        <h1 className="text-2xl font-bold text-slate-900">
+          ورود به حساب کاربری
+        </h1>
 
         <p className="mt-2 text-sm leading-6 text-slate-500">
-          برای شروع مدیریت درآمدها و هزینه‌های خود ثبت‌نام کنید.
+          برای مدیریت امور مالی خود وارد حساب کاربری شوید.
         </p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
-        <div>
-          <label
-            htmlFor="fullName"
-            className="mb-2 block text-sm font-medium text-slate-700"
-          >
-            نام و نام خانوادگی
-          </label>
-
-          <input
-            id="fullName"
-            type="text"
-            autoComplete="name"
-            placeholder=""
-            disabled={isPending}
-            {...register("fullName")}
-            className={inputClass(!!errors.fullName)}
-          />
-
-          {errors.fullName && (
-            <p className="mt-1.5 text-xs text-red-600">
-              {errors.fullName.message}
-            </p>
-          )}
-        </div>
-
         <div>
           <label
             htmlFor="email"
@@ -136,19 +103,28 @@ export default function SignupForm() {
         </div>
 
         <div>
-          <label
-            htmlFor="password"
-            className="mb-2 block text-sm font-medium text-slate-700"
-          >
-            رمز عبور
-          </label>
+          <div className="mb-2 flex items-center justify-between">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-slate-700"
+            >
+              رمز عبور
+            </label>
+
+            <Link
+              href="/forgot-password"
+              className="text-xs font-medium text-emerald-600 transition hover:text-emerald-700"
+            >
+              رمز عبور را فراموش کرده‌اید؟
+            </Link>
+          </div>
 
           <input
             id="password"
             type="password"
-            autoComplete="new-password"
+            autoComplete="current-password"
             dir="ltr"
-            placeholder="حداقل ۶ کاراکتر"
+            placeholder="رمز عبور خود را وارد کنید"
             disabled={isPending}
             {...register("password")}
             className={`${inputClass(!!errors.password)} text-left`}
@@ -157,32 +133,6 @@ export default function SignupForm() {
           {errors.password && (
             <p className="mt-1.5 text-xs text-red-600">
               {errors.password.message}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <label
-            htmlFor="confirmPassword"
-            className="mb-2 block text-sm font-medium text-slate-700"
-          >
-            تکرار رمز عبور
-          </label>
-
-          <input
-            id="confirmPassword"
-            type="password"
-            autoComplete="new-password"
-            dir="ltr"
-            placeholder="رمز عبور را دوباره وارد کنید"
-            disabled={isPending}
-            {...register("confirmPassword")}
-            className={`${inputClass(!!errors.confirmPassword)} text-left`}
-          />
-
-          {errors.confirmPassword && (
-            <p className="mt-1.5 text-xs text-red-600">
-              {errors.confirmPassword.message}
             </p>
           )}
         </div>
@@ -196,7 +146,7 @@ export default function SignupForm() {
           </div>
         )}
 
-        {state.success && state.message && (
+        {state.success && (
           <div
             role="status"
             className="rounded-xl border border-emerald-100 bg-emerald-50 px-4 py-3 text-sm leading-6 text-emerald-700"
@@ -210,17 +160,17 @@ export default function SignupForm() {
           disabled={isPending}
           className="flex h-12 w-full items-center justify-center rounded-xl bg-emerald-600 px-4 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-500/20 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {isPending ? "در حال ایجاد حساب..." : "ایجاد حساب"}
+          {isPending ? "در حال ورود..." : "ورود به حساب"}
         </button>
       </form>
 
       <div className="mt-6 border-t border-slate-100 pt-6 text-center text-sm text-slate-500">
-        قبلاً حساب دارید؟{" "}
+        حساب کاربری ندارید؟{" "}
         <Link
-          href="/login"
-          className="font-semibold text-emerald-600 hover:text-emerald-700"
+          href="/signup"
+          className="font-semibold text-emerald-600 transition hover:text-emerald-700"
         >
-          وارد شوید
+          ثبت‌نام کنید
         </Link>
       </div>
     </div>

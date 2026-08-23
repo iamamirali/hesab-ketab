@@ -2,22 +2,20 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { SignupFormValues, signupSchema } from "../schemas/signup.schema";
+import { SignupActionState } from "../types/auth-action.types";
 import { redirect } from "next/navigation";
 
-export type SignupActionResult =
-  | {
-      success: true;
-      message: string;
-    }
-  | {
-      success: false;
-      message: string;
-      fieldErrors?: Partial<Record<keyof SignupFormValues, string[]>>;
-    };
-
 export async function signupAction(
-  values: SignupFormValues,
-): Promise<SignupActionResult> {
+  _previousState: SignupActionState,
+  formData: FormData,
+): Promise<SignupActionState> {
+  const values: SignupFormValues = {
+    fullName: String(formData.get("fullName") ?? ""),
+    email: String(formData.get("email") ?? ""),
+    password: String(formData.get("password") ?? ""),
+    confirmPassword: String(formData.get("confirmPassword") ?? ""),
+  };
+
   const parsed = signupSchema.safeParse(values);
 
   if (!parsed.success) {
@@ -32,10 +30,9 @@ export async function signupAction(
 
   const supabase = await createClient();
 
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email,
     password,
-
     options: {
       data: {
         full_name: fullName,
@@ -47,6 +44,13 @@ export async function signupAction(
     return {
       success: false,
       message: getSignupErrorMessage(error.message),
+    };
+  }
+
+  if (!data.user) {
+    return {
+      success: false,
+      message: "ثبت‌نام انجام نشد. لطفاً دوباره تلاش کنید.",
     };
   }
 
