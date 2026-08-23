@@ -13,7 +13,7 @@ const initialState: SignupActionState = {
   message: "",
 };
 
-export default function SignupForm() {
+export default function SignupPage() {
   const [state, formAction, isPending] = useActionState(
     signupAction,
     initialState,

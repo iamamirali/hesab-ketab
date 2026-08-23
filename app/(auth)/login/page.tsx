@@ -13,7 +13,7 @@ const initialState: LoginActionState = {
   message: "",
 };
 
-export default function LoginForm() {
+export default function LoginPage() {
   const [state, formAction, isPending] = useActionState(
     loginAction,
     initialState,
@@ -103,21 +103,12 @@ export default function LoginForm() {
         </div>
 
         <div>
-          <div className="mb-2 flex items-center justify-between">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-slate-700"
-            >
-              رمز عبور
-            </label>
-
-            <Link
-              href="/forgot-password"
-              className="text-xs font-medium text-emerald-600 transition hover:text-emerald-700"
-            >
-              رمز عبور را فراموش کرده‌اید؟
-            </Link>
-          </div>
+          <label
+            htmlFor="password"
+            className="mb-2 block text-sm font-medium text-slate-700"
+          >
+            رمز عبور
+          </label>
 
           <input
             id="password"
