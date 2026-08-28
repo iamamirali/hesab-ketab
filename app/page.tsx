@@ -32,16 +32,16 @@ export default function LandingPage() {
           </div>
         </nav>
 
-        <div className="mx-auto max-w-7xl px-5 pb-24 pt-16 lg:px-8 lg:pb-32 lg:pt-24">
+        <div className="mx-auto max-w-7xl px-5 pb-24 pt-8 lg:px-8 lg:pb-32 lg:pt-24">
           <div className="mx-auto max-w-3xl text-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-white px-4 py-2 text-sm font-medium text-emerald-700 shadow-sm">
               <span className="h-2 w-2 rounded-full bg-emerald-500" />
               مدیریت هوشمند امور مالی
             </div>
 
-            <h1 className="text-4xl font-extrabold leading-[1.2] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+            <h1 className="text-3xl font-extrabold leading-[1.2] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
               کنترل بیشتری روی
-              <span className="block text-emerald-600">
+              <span className="block text-emerald-600 mt-2">
                 پول خود داشته باشید
               </span>
             </h1>
@@ -146,7 +146,7 @@ export default function LandingPage() {
       <section className="border-y border-slate-200 bg-white">
         <div className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-sm font-semibold text-emerald-600">امکانات</p>
+            <p className="text-2xl font-bold text-emerald-600">امکانات</p>
 
             <h2 className="mt-3 text-3xl font-bold text-slate-900">
               همه چیز برای مدیریت مالی ساده
@@ -277,7 +277,7 @@ function TransactionItem({
           positive ? "text-emerald-600" : "text-slate-500"
         }`}
       >
-        {amount}
+        <bdi>{amount}</bdi>
       </span>
     </div>
   );
