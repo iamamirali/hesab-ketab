@@ -4,10 +4,8 @@ import SideMenu from "@/components/SideMenu";
 
 export default async function PanelLayout({
   children,
-  modal,
 }: {
   children: React.ReactNode;
-  modal: React.ReactNode;
 }) {
   const supabase = await createClient();
 
@@ -24,8 +22,6 @@ export default async function PanelLayout({
       <SideMenu />
 
       <div className="lg:mr-76">{children}</div>
-
-      {modal}
     </div>
   );
 }
