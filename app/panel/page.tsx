@@ -284,7 +284,7 @@ export default function PanelPage() {
                       : "text-slate-700"
                   }`}
                 >
-                  {transaction.amount} تومان
+                  <bdi>{transaction.amount}</bdi> تومان
                 </span>
               </div>
             ))}
