@@ -23,7 +23,7 @@ export default async function PanelLayout({
     <div className="bg-slate-50">
       <SideMenu />
 
-      <div className="lg:mr-80">{children}</div>
+      <div className="lg:mr-76">{children}</div>
 
       {modal}
     </div>

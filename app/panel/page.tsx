@@ -82,8 +82,8 @@ const chartData = [
 
 export default function PanelPage() {
   return (
-    <div className="min-h-screen bg-slate-50">
-      <header className="border-b border-slate-200 bg-white">
+    <div>
+      <header className="border rounded-2xl mt-6 mx-5 lg:mx-8 border-slate-200 bg-white">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
           <h1 className="mt-1 text-xl font-bold text-slate-900">
             سلام امیرعلی 👋
