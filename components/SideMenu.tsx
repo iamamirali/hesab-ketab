@@ -1,6 +1,13 @@
 "use client";
 
-import { ArrowLeftRight, LayoutDashboard, Tags } from "lucide-react";
+import { signOutAction } from "@/app/(auth)/actions/signout.action";
+import {
+  ArrowLeftRight,
+  LayoutDashboard,
+  LogOutIcon,
+  Tags,
+} from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -27,18 +34,13 @@ export default function SideMenu() {
 
   return (
     <aside className="fixed inset-y-0 right-4 z-40 hidden w-72 rounded-2xl my-6 border border-slate-200 bg-white lg:flex lg:flex-col">
-      <div className="flex h-20 items-center border-b border-slate-100 px-6">
-        <Link href="/panel" className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-600 text-lg font-bold text-white shadow-lg shadow-emerald-600/20">
-            ح
-          </div>
+      <div className="flex h-20 items-center border-b border-slate-100 px-6 gap-1">
+        <Image src="/logo.svg" width={60} height={60} alt="logo" />
 
-          <div>
-            <p className="font-bold text-slate-900">حساب کتاب</p>
-
-            <p className="mt-0.5 text-xs text-slate-400">مدیریت امور مالی</p>
-          </div>
-        </Link>
+        <div>
+          <p className="font-bold text-slate-900">حساب کتاب</p>
+          <p className="mt-0.5 text-xs text-slate-400">مدیریت امور مالی</p>
+        </div>
       </div>
 
       <nav className="flex-1 overflow-y-auto px-4 py-6">
@@ -84,11 +86,10 @@ export default function SideMenu() {
       <div className="border-t border-slate-200 p-4">
         <button
           type="button"
-          className="mt-1 flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-red-500 transition hover:bg-red-50"
+          className="mt-1 cursor-pointer flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-red-500 transition hover:bg-red-50"
+          onClick={signOutAction}
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-red-50 text-lg">
-            ↪
-          </span>
+          <LogOutIcon size={20} />
           خروج از حساب
         </button>
       </div>

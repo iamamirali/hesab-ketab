@@ -40,7 +40,7 @@ export async function loginAction(
     };
   }
 
-  redirect("/");
+  redirect("/panel");
 }
 
 function getLoginErrorMessage(message: string): string {

@@ -9,6 +9,7 @@ import {
   PlusIcon,
   TagsIcon,
 } from "lucide-react";
+import { signOutAction } from "@/app/(auth)/actions/signout.action";
 
 const navigationItems = [
   {
@@ -106,6 +107,7 @@ export function MobileNavMenu() {
                   key={item.label}
                   type="button"
                   className="flex h-full min-w-[64px] flex-1 flex-col items-center justify-center gap-0.5 text-slate-400 transition"
+                  onClick={signOutAction}
                 >
                   <span className="flex h-9 w-10 items-center justify-center rounded-xl">
                     <Icon size={21} className="text-red-400" />
