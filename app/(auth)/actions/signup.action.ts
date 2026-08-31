@@ -54,7 +54,7 @@ export async function signupAction(
     };
   }
 
-  redirect("/");
+  redirect("/panel");
 }
 
 function getSignupErrorMessage(message: string) {
