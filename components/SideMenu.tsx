@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowLeftRight, LayoutDashboard, Tags } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -7,14 +8,17 @@ const navigationItems = [
   {
     href: "/panel",
     label: "داشبورد",
+    icon: LayoutDashboard,
   },
   {
     href: "/panel/transactions",
     label: "تراکنش‌ها",
+    icon: ArrowLeftRight,
   },
   {
     href: "/panel/categories",
     label: "دسته‌بندی‌ها",
+    icon: Tags,
   },
 ];
 
@@ -40,6 +44,8 @@ export default function SideMenu() {
       <nav className="flex-1 overflow-y-auto px-4 py-6">
         <div className="space-y-1">
           {navigationItems.map((item) => {
+            const Icon = item.icon;
+
             const isActive =
               item.href === "/panel"
                 ? pathname === "/panel"
@@ -50,7 +56,7 @@ export default function SideMenu() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`group relative flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition ${
+                className={`group relative flex items-center gap-2 rounded-xl px-3 py-3 text-sm font-medium transition ${
                   isActive
                     ? "bg-emerald-50 text-emerald-700"
                     : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
@@ -61,12 +67,12 @@ export default function SideMenu() {
                 )}
 
                 <span
-                  className={`flex h-4 w-4 items-center justify-center rounded-lg text-lg transition ${
-                    isActive
-                      ? "bg-emerald-500"
-                      : "bg-slate-200 group-hover:bg-slate-300 "
+                  className={`flex h-8 w-8 items-center justify-center rounded-xl transition ${
+                    isActive ? "bg-emerald-50" : "bg-transparent"
                   }`}
-                />
+                >
+                  <Icon size={21} strokeWidth={isActive ? 2.5 : 2} />
+                </span>
 
                 <span>{item.label}</span>
               </Link>
