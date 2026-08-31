@@ -66,7 +66,7 @@ const incomeCategories = [
 
 export default function CategoriesPage() {
   return (
-    <main className="mx-auto max-w-7xl px-5 py-6 lg:px-8">
+    <main className="mx-auto max-w-7xl px-5 lg:px-8">
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
         <h1 className="text-xl font-bold">دسته بندی تراکنش ها</h1>
         <ToggleCategoryButton />
