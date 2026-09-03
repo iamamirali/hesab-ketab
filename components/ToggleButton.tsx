@@ -13,6 +13,7 @@ type ToggleButtonProps<T> = {
   selectedButtonClassName?: string;
   value: T;
   onChange: (value: T) => void;
+  disabled?: boolean;
 };
 
 export function ToggleButton<T = string>({
@@ -21,6 +22,7 @@ export function ToggleButton<T = string>({
   onChange,
   className,
   selectedButtonClassName,
+  disabled,
 }: ToggleButtonProps<T>) {
   return (
     <div
@@ -33,13 +35,14 @@ export function ToggleButton<T = string>({
           <button
             key={option.value as Key}
             type="button"
+            disabled={disabled}
             onClick={() => onChange(option.value)}
-            className={`rounded-full w-full px-4 py-1 h-full text-sm font-medium transition-all duration-200 ${
+            className={`rounded-full cursor-pointer w-full px-4 py-1 h-full text-sm font-medium transition-all duration-200 ${
               isSelected
                 ? (selectedButtonClassName ??
                   "bg-emerald-100 text-emerald-800 shadow-sm")
                 : "text-gray-500 hover:text-gray-800"
-            }`}
+            } ${disabled ? "opacity-50" : "opacity-100"}`}
           >
             {option.label}
           </button>
