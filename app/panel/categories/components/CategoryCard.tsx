@@ -10,12 +10,14 @@ import { ECategoryType, ICategory } from "../types";
 import { Modal } from "@/components/Modal";
 import { CategoryForm } from "./CategoryForm";
 import { useState } from "react";
+import { DeleteCategoryModal } from "./DeleteCategoryModal";
 
 type TProps = ICategory;
 
 export function CategoryCard(props: TProps) {
   const { id, name, type } = props ?? {};
   const [openEditModal, setOpenEditModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const isIncome = type === ECategoryType.Income;
 
   return (
@@ -47,6 +49,7 @@ export function CategoryCard(props: TProps) {
             type="button"
             aria-label="حذف دسته‌بندی"
             className="rounded-lg p-2 cursor-pointer text-slate-400 transition hover:bg-red-50 hover:text-red-600"
+            onClick={() => setOpenDeleteModal(true)}
           >
             <Trash2Icon className="size-4 lg:size-5" />
           </button>
@@ -63,6 +66,12 @@ export function CategoryCard(props: TProps) {
           onSuccess={() => setOpenEditModal(false)}
         />
       </Modal>
+
+      <DeleteCategoryModal
+        {...{ id, name }}
+        open={openDeleteModal}
+        onClose={() => setOpenDeleteModal(false)}
+      />
     </>
   );
 }
