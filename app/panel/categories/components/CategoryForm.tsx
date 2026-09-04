@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { CategoryFormValues, categorySchema } from "@/schemas/category.schema";
 import { createCategoryAction } from "../actions/createCategory.action";
 import { ECategoryType } from "../types";
+import { updateCategoryAction } from "../actions/updateCategory.action";
 
 const initialState = {
   success: false,
@@ -13,15 +14,17 @@ const initialState = {
   errors: {},
 };
 
-export function CategoryForm({
-  onSuccess,
-  type,
-}: {
+type TProps = {
   onSuccess?: () => void;
   type: ECategoryType;
-}) {
+  name?: string;
+  id?: string;
+};
+
+export function CategoryForm({ onSuccess, type, name, id }: TProps) {
+  const isEdit = !!id;
   const [state, formAction, isPending] = useActionState(
-    createCategoryAction,
+    isEdit ? updateCategoryAction : createCategoryAction,
     initialState,
   );
 
@@ -33,7 +36,7 @@ export function CategoryForm({
   } = useForm<CategoryFormValues>({
     resolver: zodResolver(categorySchema),
     defaultValues: {
-      name: "",
+      name: name ?? "",
     },
   });
 
@@ -47,6 +50,9 @@ export function CategoryForm({
   const onSubmit = (data: CategoryFormValues) => {
     const formData = new FormData();
 
+    if (id) {
+      formData.append("id", id);
+    }
     formData.append("name", data.name);
     formData.append("type", type);
 

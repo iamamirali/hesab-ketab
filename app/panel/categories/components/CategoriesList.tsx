@@ -5,7 +5,5 @@ import { CategoryCard } from "./CategoryCard";
 export async function CategoriesList({ type }: { type: ECategoryType }) {
   const categories = await getCategoriesAction(type);
 
-  return categories?.map((item) => (
-    <CategoryCard key={item.id} name={item.name} type={item.type} />
-  ));
+  return categories?.map((item) => <CategoryCard key={item.id} {...item} />);
 }

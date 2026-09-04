@@ -6,6 +6,6 @@ export enum ECategoryType {
 export interface ICategory {
   name: string;
   type: ECategoryType;
-  id: number;
-  user_id: number;
+  id: string;
+  user_id: string;
 }
