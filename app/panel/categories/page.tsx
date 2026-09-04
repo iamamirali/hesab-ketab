@@ -1,9 +1,9 @@
 import { ToggleCategoryButton } from "./components/ToggleCategoryButton";
 import { ECategoryType } from "./types";
-import { PlusIcon } from "lucide-react";
 import { Suspense } from "react";
 import { CategoriesList } from "./components/CategoriesList";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { AddCategoryCard } from "./components/AddCategoryCard";
 
 export default async function CategoriesPage({
   searchParams,
@@ -29,21 +29,5 @@ export default async function CategoriesPage({
         </Suspense>
       </div>
     </main>
-  );
-}
-
-function AddCategoryCard({ type }: { type: ECategoryType }) {
-  const isIncome = type === ECategoryType.Income;
-
-  return (
-    <button className="flex cursor-pointer items-center gap-3 rounded-2xl border-2 border-dashed border-slate-200 bg-white py-3 px-5 transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-slate-200/50">
-      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-xl font-medium text-slate-400">
-        <PlusIcon />
-      </div>
-
-      <p className="text-base font-semibold text-slate-700">
-        افزودن دسته‌بندی {isIncome ? "درآمد" : "هزینه"}
-      </p>
-    </button>
   );
 }
