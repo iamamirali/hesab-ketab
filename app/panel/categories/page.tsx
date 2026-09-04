@@ -1,11 +1,9 @@
 import { ToggleCategoryButton } from "./components/ToggleCategoryButton";
 import { ECategoryType } from "./types";
-import { getCategoriesAction } from "./actions/categories.action";
-import {
-  BanknoteArrowDownIcon,
-  BanknoteArrowUpIcon,
-  PlusIcon,
-} from "lucide-react";
+import { PlusIcon } from "lucide-react";
+import { Suspense } from "react";
+import { CategoriesList } from "./components/CategoriesList";
+import { LoadingSpinner } from "@/components/LoadingSpinner";
 
 export default async function CategoriesPage({
   searchParams,
@@ -18,8 +16,6 @@ export default async function CategoriesPage({
       ? ECategoryType.Income
       : ECategoryType.Expense;
 
-  const categories = await getCategoriesAction(type);
-
   return (
     <main className="w-full max-w-7xl px-5 lg:px-8">
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
@@ -28,29 +24,11 @@ export default async function CategoriesPage({
       </div>
       <div className="flex flex-col gap-4">
         <AddCategoryCard type={type} />
-        {categories?.map((item) => (
-          <CategoryCard key={item.id} name={item.name} type={item.type} />
-        ))}
+        <Suspense fallback={<LoadingSpinner />}>
+          <CategoriesList type={type} />
+        </Suspense>
       </div>
     </main>
-  );
-}
-
-function CategoryCard({ name, type }: { name: string; type: ECategoryType }) {
-  const isIncome = type === ECategoryType.Income;
-
-  return (
-    <div className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-slate-200/50">
-      <div className="flex min-w-0 items-center gap-3">
-        {isIncome ? (
-          <BanknoteArrowDownIcon className="text-emerald-500" />
-        ) : (
-          <BanknoteArrowUpIcon className="text-red-600" />
-        )}
-
-        <h3 className="truncate font-bold text-slate-800">{name}</h3>
-      </div>
-    </div>
   );
 }
 

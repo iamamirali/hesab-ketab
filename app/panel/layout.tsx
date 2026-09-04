@@ -1,5 +1,3 @@
-import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
 import SideMenu from "@/components/SideMenu";
 import { MobileNavMenu } from "@/components/MobileNavMenu";
 
@@ -8,16 +6,6 @@ export default async function PanelLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect("/login");
-  }
-
   return (
     <div className="bg-slate-50 flex grow">
       <SideMenu />
