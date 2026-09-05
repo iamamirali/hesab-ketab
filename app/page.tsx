@@ -5,7 +5,7 @@ export default function LandingPage() {
   return (
     <main className="min-h-screen overflow-hidden bg-slate-50 text-slate-900">
       <section className="relative">
-        <div className="absolute inset-x-0 top-0 -z-10 h-[600px] bg-gradient-to-b from-emerald-50 via-slate-50 to-slate-50" />
+        <div className="absolute inset-x-0 top-0 -z-10 h-150 bg-linear-to-b from-emerald-50 via-slate-50 to-slate-50" />
 
         <nav className="mx-auto flex items-center justify-between px-5 py-6 lg:px-8">
           <Link href="/" className="flex items-center gap-1">

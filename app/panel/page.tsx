@@ -150,7 +150,7 @@ export default function PanelPage() {
                   key={item.month}
                   className="flex h-full flex-1 flex-col items-center justify-end"
                 >
-                  <div className="flex h-[210px] w-full items-end justify-center gap-1.5 sm:gap-2">
+                  <div className="flex h-52.5 w-full items-end justify-center gap-1.5 sm:gap-2">
                     <div
                       className="w-2.5 rounded-t-md bg-emerald-500 sm:w-4"
                       style={{
