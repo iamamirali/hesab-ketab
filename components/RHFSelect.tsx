@@ -74,7 +74,7 @@ export function RHFSelect<TFieldValues extends FieldValues, TValue = number>({
       "&:active": {
         borderColor: "#10b981",
       },
-      backgroundColor: disabled ? "#f3f4f6ba" : "#ffffff",
+      backgroundColor: disabled ? "var(--color-slate-50)" : "#ffffff",
       transition: "all 150ms ease",
     }),
 
@@ -90,7 +90,7 @@ export function RHFSelect<TFieldValues extends FieldValues, TValue = number>({
 
     singleValue: (base) => ({
       ...base,
-      color: "#064e3b",
+      color: "black",
     }),
 
     menu: (base) => ({
@@ -148,7 +148,7 @@ export function RHFSelect<TFieldValues extends FieldValues, TValue = number>({
 
     input: (base) => ({
       ...base,
-      color: "#064e3b",
+      color: "black",
     }),
 
     loadingIndicator: (base) => ({

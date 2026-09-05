@@ -112,7 +112,7 @@ export function MobileNavMenu() {
                   <button
                     key={item.label}
                     type="button"
-                    className="flex h-full min-w-[64px] flex-1 flex-col items-center justify-center gap-0.5 text-slate-400 transition"
+                    className="flex h-full min-w-16 flex-1 flex-col items-center justify-center gap-0.5 text-slate-400 transition"
                     onClick={signOutAction}
                   >
                     <span className="flex h-9 w-10 items-center justify-center rounded-xl">
