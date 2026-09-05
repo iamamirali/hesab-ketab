@@ -7,7 +7,7 @@ export default function LandingPage() {
       <section className="relative">
         <div className="absolute inset-x-0 top-0 -z-10 h-[600px] bg-gradient-to-b from-emerald-50 via-slate-50 to-slate-50" />
 
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-6 lg:px-8">
+        <nav className="mx-auto flex items-center justify-between px-5 py-6 lg:px-8">
           <Link href="/" className="flex items-center gap-1">
             <Image src="/logo.svg" width={50} height={50} alt="logo" />
             <span className="text-lg font-bold text-slate-900">حساب کتاب</span>
@@ -30,7 +30,7 @@ export default function LandingPage() {
           </div>
         </nav>
 
-        <div className="mx-auto max-w-7xl px-5 pb-24 pt-8 lg:px-8 lg:pb-32 lg:pt-24">
+        <div className="mx-auto  px-5 pb-24 pt-8 lg:px-8 lg:pb-32 lg:pt-24">
           <div className="mx-auto max-w-3xl text-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-white px-4 py-2 text-sm font-medium text-emerald-700 shadow-sm">
               <span className="h-2 w-2 rounded-full bg-emerald-500" />
@@ -142,7 +142,7 @@ export default function LandingPage() {
       </section>
 
       <section className="border-y border-slate-200 bg-white">
-        <div className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+        <div className="mx-auto  px-5 py-20 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-2xl font-bold text-emerald-600">امکانات</p>
 
@@ -201,7 +201,7 @@ export default function LandingPage() {
       </section>
 
       <footer className="border-t border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 py-7 text-sm text-slate-400 sm:flex-row lg:px-8">
+        <div className="mx-auto flex  flex-col items-center justify-between gap-4 px-5 py-7 text-sm text-slate-400 sm:flex-row lg:px-8">
           <div className="flex items-center gap-1">
             <Image src="/logo.svg" width={40} height={40} alt="logo" />
 

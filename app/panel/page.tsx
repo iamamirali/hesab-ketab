@@ -84,7 +84,7 @@ export default function PanelPage() {
   return (
     <div>
       <header className="border rounded-2xl mx-5 lg:mx-8 border-slate-200 bg-white">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
+        <div className="mx-auto flex h-20 items-center justify-between px-5 lg:px-8">
           <h1 className="mt-1 text-xl font-bold text-slate-900">
             سلام امیرعلی 👋
           </h1>
@@ -99,7 +99,7 @@ export default function PanelPage() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-7xl px-5 mt-8 lg:px-8">
+      <main className="mx-auto  px-5 mt-8 lg:px-8">
         <section className="grid gap-5 md:grid-cols-3">
           <SummaryCard
             title="موجودی کل"
