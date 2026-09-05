@@ -1,0 +1,78 @@
+"use server";
+
+import { createClient } from "@/lib/supabase/server";
+import { revalidatePath } from "next/cache";
+
+export async function updateTransactionAction(
+  _prevState: {
+    success: boolean;
+    message: string;
+    errors: Record<string, string[]>;
+  },
+  formData: FormData,
+) {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return {
+      success: false,
+      message: "لطفاً ابتدا وارد حساب کاربری خود شوید.",
+      errors: {},
+    };
+  }
+
+  const id = formData.get("id");
+  const categoryId = formData.get("category_id");
+  const amount = formData.get("amount");
+  const description = formData.get("description");
+  const createdAt = formData.get("created_at");
+
+  if (
+    typeof id !== "string" ||
+    typeof categoryId !== "string" ||
+    typeof amount !== "string" ||
+    !id ||
+    !categoryId ||
+    !amount
+  ) {
+    return {
+      success: false,
+      message: "اطلاعات وارد شده نامعتبر است.",
+      errors: {},
+    };
+  }
+
+  const { error } = await supabase
+    .from("transactions")
+    .update({
+      category_id: categoryId,
+      amount: Number(amount),
+      created_at: createdAt,
+      description:
+        typeof description === "string" && description.trim()
+          ? description.trim()
+          : null,
+    })
+    .eq("id", Number(id))
+    .eq("user_id", user.id);
+
+  if (error) {
+    return {
+      success: false,
+      message: "ویرایش تراکنش انجام نشد.",
+      errors: {},
+    };
+  }
+
+  revalidatePath("/panel");
+
+  return {
+    success: true,
+    message: "تراکنش با موفقیت ویرایش شد.",
+    errors: {},
+  };
+}

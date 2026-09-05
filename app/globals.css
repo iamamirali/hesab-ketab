@@ -3,3 +3,8 @@
 button {
   cursor: pointer;
 }
+
+.green .rmdp-day.rmdp-today span {
+  background-color: var(--color-emerald-200) !important;
+  color: black;
+}

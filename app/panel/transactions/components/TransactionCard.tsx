@@ -10,6 +10,7 @@ import { Modal } from "@/components/Modal";
 import { useState } from "react";
 import { ITransaction } from "../types";
 import { ECategoryType } from "../../categories/types";
+import { TransactionForm } from "./TransactionForm";
 
 type TProps = ITransaction;
 
@@ -96,14 +97,19 @@ export function TransactionCard(props: TProps) {
       <Modal
         open={openEditModal}
         onClose={() => setOpenEditModal(false)}
-        title={`ویرایش ${isIncome ? "درآمد" : "هزینه"}`}
-      ></Modal>
+        title="ویرایش تراکنش"
+      >
+        <TransactionForm
+          {...{ amount, category, id, description, created_at }}
+          onSuccess={() => setOpenEditModal(false)}
+        />
+      </Modal>
 
-      <Modal
+      {/* <Modal
         open={openDeleteModal}
         onClose={() => setOpenDeleteModal(false)}
         title="حذف تراکنش"
-      ></Modal>
+      ></Modal> */}
     </>
   );
 }
