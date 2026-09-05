@@ -6,5 +6,10 @@ button {
 
 .green .rmdp-day.rmdp-today span {
   background-color: var(--color-emerald-200) !important;
-  color: black;
+  color: black !important;
+}
+
+.green .rmdp-day.rmdp-selected span:not(.highlight) {
+  background-color: var(--color-emerald-600) !important;
+  color: white !important;
 }
