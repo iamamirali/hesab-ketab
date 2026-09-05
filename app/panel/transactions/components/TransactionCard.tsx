@@ -11,6 +11,7 @@ import { useState } from "react";
 import { ITransaction } from "../types";
 import { ECategoryType } from "../../categories/types";
 import { TransactionForm } from "./TransactionForm";
+import { DeleteTransactionModal } from "./DeleteTransactionModal";
 
 type TProps = ITransaction;
 
@@ -105,11 +106,17 @@ export function TransactionCard(props: TProps) {
         />
       </Modal>
 
-      {/* <Modal
+      <Modal
         open={openDeleteModal}
         onClose={() => setOpenDeleteModal(false)}
         title="حذف تراکنش"
-      ></Modal> */}
+      >
+        <DeleteTransactionModal
+          id={id}
+          open={openDeleteModal}
+          onClose={() => setOpenDeleteModal(false)}
+        />
+      </Modal>
     </>
   );
 }
