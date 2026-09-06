@@ -6,33 +6,66 @@ import {
   DiffIcon,
 } from "lucide-react";
 import { ECategoryType } from "../categories/types";
+import { LatestTransactions } from "./LatestTransactions";
 
 export async function DashboardSummary() {
   const { data } = await getDashboardSummaryAction();
   const amountDiff = (data?.total_income ?? 0) - (data?.total_expense ?? 0);
 
   return (
-    <div className="flex flex-col xl:flex-row w-full gap-6">
-      <SummaryCard
-        title="مجموع درآمد"
-        icon={<BanknoteArrowDownIcon />}
-        value={data?.total_income}
-        type={ECategoryType.Income}
-      />
-      <SummaryCard
-        title="مجموع هزینه"
-        icon={<BanknoteArrowUpIcon />}
-        value={data?.total_expense}
-        type={ECategoryType.Expense}
-      />
-      <SummaryCard
-        title="باقی مانده"
-        icon={<DiffIcon />}
-        value={amountDiff}
-        type={amountDiff > 0 ? ECategoryType.Income : ECategoryType.Expense}
-        showPositive={true}
-      />
-    </div>
+    <section className="flex flex-col gap-9">
+      <div className="flex flex-col xl:flex-row w-full gap-6">
+        <SummaryCard
+          title="مجموع درآمد"
+          icon={<BanknoteArrowDownIcon />}
+          value={data?.total_income}
+          type={ECategoryType.Income}
+        />
+        <SummaryCard
+          title="مجموع هزینه"
+          icon={<BanknoteArrowUpIcon />}
+          value={data?.total_expense}
+          type={ECategoryType.Expense}
+        />
+        <SummaryCard
+          title="باقی مانده"
+          icon={<DiffIcon />}
+          value={amountDiff}
+          type={amountDiff > 0 ? ECategoryType.Income : ECategoryType.Expense}
+          showPositive={true}
+        />
+      </div>
+
+      <LatestTransactions />
+
+      <div className="rounded-2xl border border-slate-200 bg-white p-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="font-bold text-slate-900">هزینه‌ها</h2>
+            <p className="mt-1 text-sm text-slate-400">بر اساس دسته‌بندی</p>
+          </div>
+        </div>
+
+        <div className="mt-7 space-y-5">
+          {data?.expenses_by_category?.map((expense) => (
+            <div
+              key={expense.category_id}
+              className="flex justify-between md:justify-baseline md:grid md:grid-cols-[200px_1fr_200px] items-center"
+            >
+              <span className="truncate text-sm text-slate-600">
+                {expense.category_name}
+              </span>
+
+              <div className="mx-3 border-t border-dashed border-slate-300" />
+
+              <span className="text-left text-sm font-semibold text-slate-700">
+                {new Intl.NumberFormat("fa-IR").format(expense.total)} تومان
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
