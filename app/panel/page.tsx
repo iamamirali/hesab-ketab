@@ -6,7 +6,7 @@ export default function PanelPage() {
     <div>
       <DashboardHeader />
 
-      <main className="mx-auto px-5 mt-6 lg:mt-8 lg:px-8">
+      <main className="mx-auto px-5 mt-9 lg:mt-8 lg:px-8">
         <DashboardSummary />
       </main>
     </div>

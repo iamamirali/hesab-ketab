@@ -1,5 +1,11 @@
+import {
+  ChartLineIcon,
+  ListSortDescendingIcon,
+  PercentIcon,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { ReactNode } from "react";
 
 export default function LandingPage() {
   return (
@@ -69,56 +75,33 @@ export default function LandingPage() {
           <div className="mx-auto mt-16 max-w-5xl">
             <div className="relative rounded-3xl border border-slate-200 bg-white p-3 shadow-2xl shadow-slate-300/40">
               <div className="rounded-2xl bg-slate-50 p-5 sm:p-7">
-                <div className="mb-6 flex items-center justify-between">
-                  <div>
-                    <div className="h-3 w-24 rounded-full bg-slate-200" />
-                    <div className="mt-3 h-7 w-40 rounded-lg bg-slate-200" />
-                  </div>
-
-                  <div className="h-10 w-10 rounded-xl bg-emerald-100" />
+                <div className="mb-6 w-full bg-white p-4 rounded-xl border border-slate-200">
+                  <h3 className="font-bold text-sm">کاربر حساب کتاب</h3>
                 </div>
 
                 <div className="grid gap-4 sm:grid-cols-3">
                   <DashboardCard
-                    title="موجودی کل"
+                    title="مجموع درآمد"
                     value="۲۴,۸۵۰,۰۰۰"
                     suffix="تومان"
                   />
 
                   <DashboardCard
-                    title="درآمد این ماه"
+                    title="مجموع هزینه"
                     value="۱۲,۴۰۰,۰۰۰"
                     suffix="تومان"
                   />
 
                   <DashboardCard
-                    title="هزینه این ماه"
+                    title="باقی مانده"
                     value="۵,۸۵۰,۰۰۰"
                     suffix="تومان"
                   />
                 </div>
 
-                <div className="mt-5 grid gap-5 lg:grid-cols-[1.5fr_1fr]">
+                <div className="mt-5">
                   <div className="rounded-2xl border border-slate-200 bg-white p-5">
-                    <div className="flex items-center justify-between">
-                      <div className="h-4 w-28 rounded bg-slate-200" />
-                      <div className="h-8 w-20 rounded-lg bg-slate-100" />
-                    </div>
-
-                    <div className="mt-8 flex h-40 items-end gap-3">
-                      <ChartBar height="35%" />
-                      <ChartBar height="55%" />
-                      <ChartBar height="42%" />
-                      <ChartBar height="72%" />
-                      <ChartBar height="58%" />
-                      <ChartBar height="88%" />
-                      <ChartBar height="68%" />
-                      <ChartBar height="95%" />
-                    </div>
-                  </div>
-
-                  <div className="rounded-2xl border border-slate-200 bg-white p-5">
-                    <div className="h-4 w-28 rounded bg-slate-200" />
+                    <h3 className="text-sm font-semibold">آخرین تراکنش ها</h3>
 
                     <div className="mt-6 space-y-4">
                       <TransactionItem title="خرید روزانه" amount="-۳۵۰,۰۰۰" />
@@ -158,19 +141,19 @@ export default function LandingPage() {
 
           <div className="mt-12 grid gap-5 md:grid-cols-3">
             <FeatureCard
-              icon="↗"
+              icon={<PercentIcon />}
               title="مدیریت درآمد و هزینه"
               description="تمام درآمدها و هزینه‌های خود را ثبت کنید و تصویر واضحی از وضعیت مالی خود داشته باشید."
             />
 
             <FeatureCard
-              icon="◈"
+              icon={<ListSortDescendingIcon />}
               title="دسته‌بندی تراکنش‌ها"
               description="تراکنش‌های خود را دسته‌بندی کنید تا بدانید بیشترین هزینه‌های شما مربوط به چه بخش‌هایی است."
             />
 
             <FeatureCard
-              icon="⌁"
+              icon={<ChartLineIcon />}
               title="گزارش مالی"
               description="وضعیت درآمد، هزینه و موجودی خود را بررسی کنید و تصمیم‌های مالی بهتری بگیرید."
             />
@@ -233,17 +216,7 @@ function DashboardCard({
 
         <span className="text-xs text-slate-400">{suffix}</span>
       </div>
-
-      <div className="mt-4 h-1.5 w-20 rounded-full bg-emerald-100">
-        <div className="h-full w-3/4 rounded-full bg-emerald-500" />
-      </div>
     </div>
-  );
-}
-
-function ChartBar({ height }: { height: string }) {
-  return (
-    <div className="flex-1 rounded-t-lg bg-emerald-500/80" style={{ height }} />
   );
 }
 
@@ -273,7 +246,7 @@ function TransactionItem({
           positive ? "text-emerald-600" : "text-slate-500"
         }`}
       >
-        <bdi>{amount}</bdi>
+        <bdi>{amount}</bdi> تومان
       </span>
     </div>
   );
@@ -284,7 +257,7 @@ function FeatureCard({
   title,
   description,
 }: {
-  icon: string;
+  icon: ReactNode;
   title: string;
   description: string;
 }) {
