@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { DashboardSummary } from "./_components/DashboardSummary";
+import { DashboardHeader } from "./_components/DashboardHeader";
 
 const transactions = [
   {
@@ -75,21 +76,7 @@ const expenses = [
 export default function PanelPage() {
   return (
     <div>
-      <header className="border rounded-2xl mx-5 lg:mx-8 border-slate-200 bg-white">
-        <div className="mx-auto flex h-20 items-center justify-between px-5 lg:px-8">
-          <h1 className="mt-1 text-xl font-bold text-slate-900">
-            سلام امیرعلی 👋
-          </h1>
-
-          <Link
-            href="/panel/transactions/new"
-            className="flex h-11 items-center gap-2 rounded-xl bg-emerald-600 px-4 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-700"
-          >
-            <span className="text-lg">+</span>
-            ثبت تراکنش
-          </Link>
-        </div>
-      </header>
+      <DashboardHeader />
 
       <main className="mx-auto px-5 mt-6 lg:mt-8 lg:px-8">
         <section>
