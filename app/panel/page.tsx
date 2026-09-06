@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DashboardSummary } from "./_components/DashboardSummary";
 
 const transactions = [
   {
@@ -71,15 +72,6 @@ const expenses = [
   },
 ];
 
-const chartData = [
-  { month: "فروردین", income: 72, expense: 45 },
-  { month: "اردیبهشت", income: 60, expense: 52 },
-  { month: "خرداد", income: 85, expense: 48 },
-  { month: "تیر", income: 70, expense: 58 },
-  { month: "مرداد", income: 92, expense: 55 },
-  { month: "شهریور", income: 78, expense: 42 },
-];
-
 export default function PanelPage() {
   return (
     <div>
@@ -99,93 +91,12 @@ export default function PanelPage() {
         </div>
       </header>
 
-      <main className="mx-auto  px-5 mt-8 lg:px-8">
-        <section className="grid gap-5 md:grid-cols-3">
-          <SummaryCard
-            title="موجودی کل"
-            value="۴۲,۳۵۰,۰۰۰"
-            suffix="تومان"
-            icon="◈"
-            description="موجودی فعلی حساب‌ها"
-          />
-
-          <SummaryCard
-            title="درآمد این ماه"
-            value="۲۷,۵۰۰,۰۰۰"
-            suffix="تومان"
-            icon="↗"
-            description="۱۲٪ بیشتر از ماه قبل"
-            positive
-          />
-
-          <SummaryCard
-            title="هزینه این ماه"
-            value="۸,۴۲۰,۰۰۰"
-            suffix="تومان"
-            icon="↘"
-            description="۸٪ کمتر از ماه قبل"
-            positive
-          />
+      <main className="mx-auto px-5 mt-6 lg:mt-8 lg:px-8">
+        <section>
+          <DashboardSummary />
         </section>
 
         <section className="mt-6 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
-          <div className="rounded-2xl border border-slate-200 bg-white p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="font-bold text-slate-900">وضعیت مالی</h2>
-
-                <p className="mt-1 text-sm text-slate-400">
-                  مقایسه درآمد و هزینه در ماه‌های اخیر
-                </p>
-              </div>
-
-              <button className="rounded-lg border border-slate-200 px-3 py-2 text-xs text-slate-500 transition hover:bg-slate-50">
-                ۶ ماه اخیر
-              </button>
-            </div>
-
-            <div className="mt-8 flex h-64 items-end gap-3 sm:gap-6">
-              {chartData.map((item) => (
-                <div
-                  key={item.month}
-                  className="flex h-full flex-1 flex-col items-center justify-end"
-                >
-                  <div className="flex h-52.5 w-full items-end justify-center gap-1.5 sm:gap-2">
-                    <div
-                      className="w-2.5 rounded-t-md bg-emerald-500 sm:w-4"
-                      style={{
-                        height: `${item.income}%`,
-                      }}
-                    />
-
-                    <div
-                      className="w-2.5 rounded-t-md bg-slate-200 sm:w-4"
-                      style={{
-                        height: `${item.expense}%`,
-                      }}
-                    />
-                  </div>
-
-                  <span className="mt-3 text-[10px] text-slate-400 sm:text-xs">
-                    {item.month}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-6 flex items-center justify-center gap-6 text-xs text-slate-500">
-              <div className="flex items-center gap-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
-                درآمد
-              </div>
-
-              <div className="flex items-center gap-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-slate-200" />
-                هزینه
-              </div>
-            </div>
-          </div>
-
           <div className="rounded-2xl border border-slate-200 bg-white p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -290,109 +201,7 @@ export default function PanelPage() {
             ))}
           </div>
         </section>
-
-        <section className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          <QuickAction
-            href="/panel/transactions/new?type=income"
-            icon="↗"
-            title="ثبت درآمد"
-            description="یک درآمد جدید ثبت کنید"
-          />
-
-          <QuickAction
-            href="/panel/transactions/new?type=expense"
-            icon="↘"
-            title="ثبت هزینه"
-            description="یک هزینه جدید ثبت کنید"
-          />
-
-          <QuickAction
-            href="/panel/accounts"
-            icon="◈"
-            title="حساب‌های من"
-            description="مدیریت حساب‌ها و موجودی"
-          />
-        </section>
       </main>
     </div>
-  );
-}
-
-function SummaryCard({
-  title,
-  value,
-  suffix,
-  icon,
-  description,
-  positive = false,
-}: {
-  title: string;
-  value: string;
-  suffix: string;
-  icon: string;
-  description: string;
-  positive?: boolean;
-}) {
-  return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <div className="flex items-start justify-between">
-        <div>
-          <p className="text-sm text-slate-400">{title}</p>
-
-          <div className="mt-3 flex items-baseline gap-1.5">
-            <span className="text-2xl font-bold tracking-tight text-slate-900">
-              {value}
-            </span>
-
-            <span className="text-xs text-slate-400">{suffix}</span>
-          </div>
-        </div>
-
-        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-lg font-bold text-emerald-600">
-          {icon}
-        </div>
-      </div>
-
-      <p
-        className={`mt-5 text-xs ${
-          positive ? "text-emerald-600" : "text-slate-400"
-        }`}
-      >
-        {description}
-      </p>
-    </div>
-  );
-}
-
-function QuickAction({
-  href,
-  icon,
-  title,
-  description,
-}: {
-  href: string;
-  icon: string;
-  title: string;
-  description: string;
-}) {
-  return (
-    <Link
-      href={href}
-      className="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-lg hover:shadow-slate-200/50"
-    >
-      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-lg font-bold text-emerald-600 transition group-hover:bg-emerald-600 group-hover:text-white">
-        {icon}
-      </div>
-
-      <div>
-        <h3 className="text-sm font-bold text-slate-800">{title}</h3>
-
-        <p className="mt-1 text-xs text-slate-400">{description}</p>
-      </div>
-
-      <span className="mr-auto text-slate-300 transition group-hover:text-emerald-500">
-        ←
-      </span>
-    </Link>
   );
 }
