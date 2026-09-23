@@ -1,3 +1,6 @@
+"use client";
+
+import { LinearLoader } from "@/components/LinearLoader";
 import {
   ChartLineIcon,
   ListSortDescendingIcon,
@@ -5,11 +8,14 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 export default function LandingPage() {
+  const [showLoader, setShowLoader] = useState(false);
+
   return (
     <main className="min-h-screen overflow-hidden bg-slate-50 text-slate-900">
+      <LinearLoader show={showLoader} />
       <section className="relative">
         <div className="absolute inset-x-0 top-0 -z-10 h-150 bg-linear-to-b from-emerald-50 via-slate-50 to-slate-50" />
 
@@ -23,6 +29,7 @@ export default function LandingPage() {
             <Link
               href="/login"
               className="hidden rounded-xl px-4 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-white hover:text-slate-900 sm:block"
+              onClick={() => setShowLoader(true)}
             >
               ورود
             </Link>
@@ -30,6 +37,7 @@ export default function LandingPage() {
             <Link
               href="/signup"
               className="rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-700"
+              onClick={() => setShowLoader(true)}
             >
               شروع کنید
             </Link>
@@ -59,6 +67,7 @@ export default function LandingPage() {
               <Link
                 href="/signup"
                 className="flex h-12 w-full items-center justify-center rounded-xl bg-emerald-600 px-7 text-sm font-semibold text-white shadow-xl shadow-emerald-600/20 transition hover:-translate-y-0.5 hover:bg-emerald-700 sm:w-auto"
+                onClick={() => setShowLoader(true)}
               >
                 ایجاد حساب رایگان
               </Link>
@@ -66,6 +75,7 @@ export default function LandingPage() {
               <Link
                 href="/login"
                 className="flex h-12 w-full items-center justify-center rounded-xl border border-slate-200 bg-white px-7 text-sm font-semibold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-50 sm:w-auto"
+                onClick={() => setShowLoader(true)}
               >
                 ورود به حساب
               </Link>
@@ -176,6 +186,7 @@ export default function LandingPage() {
             <Link
               href="/signup"
               className="mt-8 inline-flex h-12 items-center justify-center rounded-xl bg-white px-7 text-sm font-semibold text-emerald-700 shadow-lg transition hover:-translate-y-0.5 hover:bg-emerald-50"
+              onClick={() => setShowLoader(true)}
             >
               ایجاد حساب رایگان
             </Link>

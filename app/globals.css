@@ -13,3 +13,17 @@ button {
   background-color: var(--color-emerald-600) !important;
   color: white !important;
 }
+
+@keyframes browser-loader {
+  0% {
+    transform: translateX(-200%);
+  }
+
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+.animate-browser-loader {
+  animation: browser-loader 1.2s ease-in-out infinite;
+}
