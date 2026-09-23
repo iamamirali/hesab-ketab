@@ -7,10 +7,16 @@ import {
 } from "lucide-react";
 import { ECategoryType } from "../categories/types";
 import { LatestTransactions } from "./LatestTransactions";
+import { NewcomerContent } from "./NewcomerContent";
 
 export async function DashboardSummary() {
   const { data } = await getDashboardSummaryAction();
   const amountDiff = (data?.total_income ?? 0) - (data?.total_expense ?? 0);
+  const hasTransaction = data?.total_expense || data?.total_income;
+
+  if (!hasTransaction) {
+    return <NewcomerContent step={data?.hasCategories ? 2 : 1} />;
+  }
 
   return (
     <section className="flex flex-col gap-9">
@@ -84,7 +90,7 @@ function SummaryCard({
 }) {
   const formattedValue = value
     ? new Intl.NumberFormat("fa-IR").format(value)
-    : "-";
+    : "۰";
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-white px-6 py-6 lg:py-8 w-full shadow-sm">
